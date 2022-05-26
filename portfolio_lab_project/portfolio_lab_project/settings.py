@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+# https://github.com/MBajera
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -70,17 +71,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'portfolio_lab_project.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -121,3 +111,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Database configurations is moved to external file
+try:
+    from portfolio_lab_project.local_settings import DATABASES
+except ModuleNotFoundError:
+    print("Brak konfiguracji bazy danych w pliku local_settings.py!")
+    print("Uzupełnij dane i spróbuj ponownie!")
+    exit(0)
